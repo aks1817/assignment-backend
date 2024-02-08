@@ -88,6 +88,10 @@ exports.updateSubtask = async (req, res) => {
       { status },
       { new: true }
     );
+    if (status === 1) {
+      // Update the status of the task to "IN_PROGRESS"
+      await Task.findByIdAndUpdate(task._id, { status: "IN_PROGRESS" });
+    }
     res.json(updatedSubtask);
   } catch (error) {
     console.error(error.message);
